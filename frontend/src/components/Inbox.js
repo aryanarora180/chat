@@ -6,6 +6,11 @@ let socket = io('http://localhost:9000')
 class Inbox extends React.Component {
   constructor() {
     super();
+    let username = Cookies.get("username") || '';
+    if (username.length < 1) {
+      window.location.assign("/");
+      return;
+    }
     this.state = {
       username: Cookies.get("username"),
       messages: [
