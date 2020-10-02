@@ -4,6 +4,12 @@ import Cookies from "js-cookie";
 class Login extends React.Component {
   constructor() {
     super();
+    // Check if user is already logged in 
+    let username = Cookies.get('username') || ''
+    if (username.length > 1) {
+      window.location.assign('/inbox')
+      return;
+    }
     this.state = {
       username: "",
     };
@@ -68,7 +74,8 @@ const style = {
     padding: 20,
   },
   input: {
-    borderWidth: "4",
+    padding: 10,
+    borderWidth: "5",
     borderColor: "#9900cc",
     margin: 10,
   },
