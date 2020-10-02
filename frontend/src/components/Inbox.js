@@ -6,6 +6,11 @@ let socket = io('http://localhost:9000')
 class Inbox extends React.Component {
   constructor() {
     super();
+    let username = Cookies.get("username") || '';
+    if (username.length < 1) {
+      window.location.assign("/");
+      return;
+    }
     this.state = {
       username: Cookies.get("username"),
       messages: [
@@ -39,6 +44,10 @@ class Inbox extends React.Component {
   }
   handleSubmit = async (e) => {
       e.preventDefault();
+      if (this.state.sendUsername === this.state.username) {
+        alert("Cannot send message to yourself");
+        return;
+      }
       if (this.state.sendMessage.length < 1 || this.state.sendUsername < 1) {
           alert("Username or message cannot be empty");
           return;
