@@ -2,8 +2,12 @@ import React from "react";
 import Cookies from "js-cookie";
 import io from "socket.io-client";
 import { Link } from "react-router-dom";
-import $ from 'jquery';
+import $ from "jquery";
+import { TextField, PrimaryButton } from "@fluentui/react";
+import { Card } from "@uifabric/react-cards";
+import Contacts from "./Contacts.js";
 let socket = io("http://localhost:9000");
+
 class Inbox extends React.Component {
   constructor() {
     super();
@@ -60,47 +64,51 @@ class Inbox extends React.Component {
   };
   logOut = async (e) => {
     // deleting username cookie
-    await Cookies.remove('username');
-    window.location.assign('/');
-  }
+    await Cookies.remove("username");
+    window.location.assign("/");
+  };
   render() {
     return (
-        <div style={style.loginBox}>
-          <h1>{this.state.username}'s Inbox</h1>
-          <button style={style.button} onClick={this.logOut}>Logout</button>
-          {this.state.messages.map((item) => (
-            <ul style={style.message}>
-              <li>
-                <b>from:</b> {item.username}
-              </li>
-              <li>
-                <b>message:</b> {item.message}
-              </li>
-            </ul>
-          ))}
-          <form style={style.form}>
-            <input
-              style={style.input}
-              value={this.state.sendUsername}
-              name="username"
-              onChange={this.handleSendUsername}
-              placeholder="Username"
-            />
-            <input
-              style={style.input}
-              value={this.state.sendMessage}
-              name="message"
-              onChange={this.handleSendMessage}
-              placeholder="Message"
-            />
-            <input
-              style={style.button}
-              type="submit"
-              onClick={this.handleSubmit}
-              name="submit"
-            />
-          </form>
+      <div className="ms-Grid" dir="ltr">
+        <div className="ms-Grid-row">
+          <div className="ms-Grid-col ms-sm3 ms-xl3">
+            <Contacts />
+          </div>
+          <div className="ms-Grid-col ms-sm9 ms-xl9">
+            <div className="ms-Grid-row">
+              <div
+                className="main-element ms-Grid-col ms-sm11 ms-xl11"
+                style={{ backgroundColor: "white" }}
+              >
+                Brief info about the user
+              </div>
+            </div>
+            <div className="ms-Grid-row">
+              <div
+                className="main-element ms-Grid-col ms-sm11 ms-xl11"
+                style={{ backgroundColor: "white", height: "100vh" }}
+              >
+                <form style={style.form}>
+                  <div className="ms-Grid-col ms-sm9 ms-xl9">
+                    <TextField
+                      style={{ display: "inline", width: "70%" }}
+                      type="text"
+                      placeholder="Type your message"
+                    />
+                  </div>
+                  <div className="ms-Grid-col ms-sm2 ms-xl2">
+                    <PrimaryButton
+                      style={{ display: "inline", margin: 0, width: "20%" }}
+                    >
+                      Send
+                    </PrimaryButton>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     );
   }
 }
@@ -109,52 +117,24 @@ export default Inbox;
 
 const style = {
   main: {
-    position: "absolute",
-    backgroundColor: "#9900cc",
-    width: "100%",
-    fontWeight: 500,
-  },
-  loginBox: {
-    position: "relative",
+    position: "fixed",
     backgroundColor: "white",
-    width: "70%",
-    color: "black",
+    width: "auto",
+    margin: "auto",
+    fontWeight: 500,
+    height: "100vh",
     float: "none",
-    marginTop: 100,
-    marginRight: "auto",
-    marginLeft: "auto",
-    padding: 20,
-  },
-  message: {
-    boxShadow: "box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);",
-    position: "relative",
-    padding: 10,
-    width: "90%",
-    borderStyle: "solid",
-    borderWidth: "4",
-    borderColor: "#9900cc",
-    fontWeight: 100,
-    listStyleType: "none",
   },
   form: {
     display: "inline-block",
     float: "none",
-    position: "fixed",
     bottom: 0,
-    left: "auto",
-    right: "auto",
-    width: "100vh",
-  },
-  input: {
-    padding: 10,
-    width: "32%",
-    borderWidth: "4",
-    borderColor: "#9900cc",
-  },
-  button: {
-    width: "10%",
-    backgroundColor: "#106ebe",
-    padding: 10,
-    color: "white",
+    left: "25%",
+    right: "-7%",
+    margin: "auto",
+    // width: "800",
+    overflow: "hidden",
+    zIndex: 10,
+    position: "fixed",
   },
 };
