@@ -2,8 +2,8 @@ import React from "react";
 import Cookies from "js-cookie";
 import io from "socket.io-client";
 import { Link } from "react-router-dom";
+import $ from 'jquery';
 let socket = io("http://localhost:9000");
-
 class Inbox extends React.Component {
   constructor() {
     super();
@@ -65,12 +65,9 @@ class Inbox extends React.Component {
   }
   render() {
     return (
-      <div style={style.main}>
         <div style={style.loginBox}>
           <h1>{this.state.username}'s Inbox</h1>
-
           <button style={style.button} onClick={this.logOut}>Logout</button>
-
           {this.state.messages.map((item) => (
             <ul style={style.message}>
               <li>
@@ -104,7 +101,6 @@ class Inbox extends React.Component {
             />
           </form>
         </div>
-      </div>
     );
   }
 }
@@ -157,7 +153,7 @@ const style = {
   },
   button: {
     width: "10%",
-    backgroundColor: "#9900cc",
+    backgroundColor: "#106ebe",
     padding: 10,
     color: "white",
   },

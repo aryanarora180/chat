@@ -1,13 +1,16 @@
 import React from "react";
 import Cookies from "js-cookie";
+import { PrimaryButton, TextField } from "@fluentui/react";
+import { Card } from "@uifabric/react-cards";
+import "office-ui-fabric-react/dist/css/fabric.css";
 
 class Login extends React.Component {
   constructor() {
     super();
-    // Check if user is already logged in 
-    let username = Cookies.get('username') || ''
+    // Check if user is already logged in
+    let username = Cookies.get("username") || "";
     if (username.length > 1) {
-      window.location.assign('/inbox')
+      window.location.assign("/inbox");
       return;
     }
     this.state = {
@@ -20,36 +23,44 @@ class Login extends React.Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
+    if (this.state.username.length < 3) {
+      alert("Please enter a valid username");
+      return;
+    }
     Cookies.set("username", this.state.username);
     window.location.assign("/inbox");
   };
   render() {
     return (
-      <div style={style.main}>
-        <div style={style.loginBox}>
-          <center>
-            <h1>Welcome</h1>
-            <br />
-            <form>
-              <p>Enter your username to enter chat</p>
-              <input
-                style={style.input}
-                value={this.state.username}
-                name="username"
-                onChange={this.handleUsername}
-                placeholder="Username"
-              />
-              <br />
-              <input
-                style={style.button}
-                type="submit"
-                onClick={this.handleSubmit}
-                name="submit"
-              />
-            </form>
-          </center>
-        </div>
-      </div>
+      <Card
+        style={{
+          float: "none",
+          margin: "auto",
+          marginTop: 100,
+          padding: 40,
+          width: "60%",
+          backgroundColor: "white",
+        }}
+      >
+        <h1>Login</h1>
+        <form>
+          <TextField
+            label="username"
+            name="username"
+            onChange={this.handleUsername}
+            placeholder="username"
+            value={this.state.username}
+          />
+          <br/>
+          <PrimaryButton
+            type="submit"
+            name="submit"
+            onClick={this.handleSubmit}
+          >
+            Login
+          </PrimaryButton>
+        </form>
+      </Card>
     );
   }
 }
