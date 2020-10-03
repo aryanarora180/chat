@@ -1,0 +1,38 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #106ebe;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.contacts {
+    position: fixed;
+    height: 100%;
+    display: block;
+    width: 20%;
+    background-color: white;
+    z-index: 10;
+    margin: 0px;
+}
+
+button {
+  color: white;
+  background-color: #9900cc;
+  border-width: 5px;
+  border-color: white;
+  padding: 10px;
+}
+.login-form {
+  display: block;
+  float: none;
+  margin: auto;
+  width: 60%;
+  background-color: white;
+  height: 50vh;
+}
