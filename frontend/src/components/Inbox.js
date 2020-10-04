@@ -11,13 +11,20 @@ let socket = io("http://localhost:9000");
 class Inbox extends React.Component {
   constructor() {
     super();
-    let username = Cookies.get("username") || "";
+    let username = null
+    try {
+      username = Cookies.get("username") || "";
+    } catch (e) {
+      console.log(e);
+      alert('Error in getting cookie, make sure cookies are on in your browser');
+      return;
+    }
     if (username.length < 1) {
       window.location.assign("/");
       return;
     }
     this.state = {
-      username: Cookies.get("username"),
+      username: username,
       messages: [],
       sendUsername: "",
       sendMessage: "",

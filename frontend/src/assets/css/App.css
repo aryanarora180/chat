@@ -35,4 +35,8 @@ button {
   width: 60%;
   background-color: white;
   height: 50vh;
+  border-color: #9900cc;
+  border-width: 4px;
+  border-radius: 3px;
+  padding: 20px;
 }

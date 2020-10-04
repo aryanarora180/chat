@@ -27,8 +27,13 @@ class Login extends React.Component {
       alert("Please enter a valid username");
       return;
     }
-    Cookies.set("username", this.state.username);
-    window.location.assign("/inbox");
+    try {
+      Cookies.set("username", this.state.username);
+      window.location.assign("/inbox");
+    } catch (e) {
+      console.log(e);
+      alert('Error in setting cookie, make sure cookies are enabled in your browser');
+    }
   };
   render() {
     return (
