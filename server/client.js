@@ -24,6 +24,10 @@ socket.on('message', payload => {
     console.log(`Message: ${payload.data}`);
 }) 
 
+socket.on('diconnect', () => {
+    console.log('You were disconnected');
+});
+
 
 
 
